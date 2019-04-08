@@ -283,7 +283,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.organization.Calculator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.IsaacRaval.SwiftCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -301,7 +301,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.organization.Calculator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.IsaacRaval.SwiftCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
