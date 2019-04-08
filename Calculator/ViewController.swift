@@ -20,17 +20,17 @@ class ViewController: NSViewController {
     var mathSymbols = [Character]()
     
     //Array for the complete numbers (e.g. 2,5,2 as 252)
-    var numsWhole = [Int]()
+    var numsWhole = [Double]()
     
     //Stores calculations in equal sign function
-    var newEvaluation = 0
+    var newEvaluation = 0.0
     
     //Boolean representing whether an equation was just solved, and the screen is showing the answer
     var displayingResultOfAnEquation = false;
     
     
     //A constant set to an arbitrary value, representing an error in unwraping an optional
-    let ERROR = 99999
+    let ERROR = 99999.0
     
     @IBAction func zero(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
@@ -244,10 +244,10 @@ class ViewController: NSViewController {
                 continue;
             case "+":
                 //When hitting operator, convert combined number to int
-                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? ERROR
+                var convToDouble: Double = Double(combineDidgitsIntoNumber) ?? ERROR
                 //Add to array
-                print("Adding \(convToInt)")
-                numsWhole.append(convToInt)
+                print("Adding \(convToDouble)")
+                numsWhole.append(convToDouble)
                 //Add operator to array
                 mathSymbols.append("+")
                 //Clear combineDidgitsIntoNumber
@@ -255,36 +255,36 @@ class ViewController: NSViewController {
                 
             case "-":
                 //When hitting operator, convert combined number to int
-                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? ERROR
+                var convToDouble: Double = Double(combineDidgitsIntoNumber) ?? ERROR
                 //Add to array
-                numsWhole.append(convToInt)
+                numsWhole.append(convToDouble)
                 //Add operator to array
                 mathSymbols.append("-")
                 //Clear combineDidgitsIntoNumber
                 combineDidgitsIntoNumber.removeAll()
             case "*":
                 //When hitting operator, convert combined number to int
-                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? ERROR
+                var convToDouble: Double = Double(combineDidgitsIntoNumber) ?? ERROR
                 //Add to array
-                numsWhole.append(convToInt)
+                numsWhole.append(convToDouble)
                 //Add operator to array
                 mathSymbols.append("*")
                 //Clear combineDidgitsIntoNumber
                 combineDidgitsIntoNumber.removeAll()
             case "/":
                 //When hitting operator, convert combined number to int
-                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? ERROR
+                var convToDouble: Double = Double(combineDidgitsIntoNumber) ?? ERROR
                 //Add to array
-                numsWhole.append(convToInt)
+                numsWhole.append(convToDouble)
                 //Add operator to array
                 mathSymbols.append("/")
                 //Clear combineDidgitsIntoNumber
                 combineDidgitsIntoNumber.removeAll()
             case "=":
                 //When hitting operator, convert combined number to int
-                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? ERROR
+                var convToDouble: Double = Double(combineDidgitsIntoNumber) ?? ERROR
                 //Add to array
-                numsWhole.append(convToInt)
+                numsWhole.append(convToDouble)
                 //Clear combineDidgitsIntoNumber
                 combineDidgitsIntoNumber.removeAll()
                 
