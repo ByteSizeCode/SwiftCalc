@@ -218,7 +218,7 @@ class ViewController: NSViewController {
         for element in numsAndMathSymbolsAsIndividualCharectors { //Check if any opoerators were pressed
             if(element == "+" || element == "-" || element == "*" || element == "/") {
                 containsOperator = 1
-                continue
+                break
             }
             else {
                 arrayContents_tmpVar.append(element)
