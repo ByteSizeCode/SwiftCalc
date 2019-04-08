@@ -901,6 +901,17 @@
                                     <action selector="equalitySign:" target="XfG-lQ-9wD" id="q1w-Ki-DFE"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Cn-O9-NId">
+                                <rect key="frame" x="318" y="152" width="28" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="inline" title="AC" bezelStyle="inline" alignment="center" borderStyle="border" inset="2" id="gp6-cz-zqi">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystemBold"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clearAll:" target="XfG-lQ-9wD" id="pCM-RR-PVB"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>

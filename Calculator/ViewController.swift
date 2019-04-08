@@ -189,6 +189,17 @@ class ViewController: NSViewController {
     }
     
     
+    @IBAction func clearAll(_ sender: NSButton) {
+        //Erase arrays
+        mathSymbols.removeAll()
+        numsWhole.removeAll()
+        numsAndMathSymbolsAsIndividualCharectors.removeAll()
+        
+        //Clear viewWindow
+        viewWindow.documentView?.deleteToBeginningOfLine((Any).self)
+    }
+    
+    
     @IBAction func equalitySign(_ sender: NSButton) {
         var combineDidgitsIntoNumber = ""
         
