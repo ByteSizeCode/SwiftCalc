@@ -827,7 +827,7 @@
                                     <font key="font" metaFont="smallSystemBold"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="plus:" target="XfG-lQ-9wD" id="AYL-op-ZiT"/>
+                                    <action selector="add:" target="XfG-lQ-9wD" id="AYL-op-ZiT"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hs6-73-CpS">
@@ -838,7 +838,7 @@
                                     <font key="font" metaFont="smallSystemBold"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="minus:" target="XfG-lQ-9wD" id="enR-1r-JNd"/>
+                                    <action selector="subtract:" target="XfG-lQ-9wD" id="enR-1r-JNd"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g9j-m0-bak">

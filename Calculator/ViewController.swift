@@ -32,6 +32,9 @@ class ViewController: NSViewController {
     //A constant set to an arbitrary value, representing an error in unwraping an optional
     let ERROR = 99999.0
     
+    //A constant to account for an offset for a specific case
+    let OFFSET_TO_ACCOUNT_FOR_THE_APPENDED_EQUAL_SIGN_IN_ARRAY = 1
+    
     @IBAction func zero(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
         clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
@@ -144,7 +147,7 @@ class ViewController: NSViewController {
         numsAndMathSymbolsAsIndividualCharectors.append("9")
     }
     
-    @IBAction func plus(_ sender: NSButton) {
+    @IBAction func add(_ sender: NSButton) {
         //Clear viewWindow
         viewWindow.documentView?.deleteToBeginningOfLine((Any).self)
         
@@ -155,7 +158,7 @@ class ViewController: NSViewController {
         numsAndMathSymbolsAsIndividualCharectors.append("+")
     }
     
-    @IBAction func minus(_ sender: NSButton) {
+    @IBAction func subtract(_ sender: NSButton) {
         //Clear viewWindow
         viewWindow.documentView?.deleteToBeginningOfLine((Any).self)
         
@@ -197,17 +200,44 @@ class ViewController: NSViewController {
         
         //Clear viewWindow
         viewWindow.documentView?.deleteToBeginningOfLine((Any).self)
+        
+        //Clear results from last calculation
+        newEvaluation = 0.0;
     }
     
     
     @IBAction func equalitySign(_ sender: NSButton) {
         var combineDidgitsIntoNumber = ""
         
-        //Append an equal sign at the end for parsing purposes
-        numsAndMathSymbolsAsIndividualCharectors.append("=")
-        
         //Clear viewWindow
         viewWindow.documentView?.deleteToBeginningOfLine((Any).self)
+        
+        //Edgecase: If user enters only 1 number and then clicks the equal sign, show that answer
+        var containsOperator = 0;
+        var arrayContents_tmpVar = "";
+        for element in numsAndMathSymbolsAsIndividualCharectors { //Check if any opoerators were pressed
+            if(element == "+" || element == "-" || element == "*" || element == "/") {
+                containsOperator = 1
+                continue
+            }
+            else {
+                arrayContents_tmpVar.append(element)
+            }
+        }
+        if(containsOperator != 1) { //If no operators pressed this is one number- display that number. No further action needed.
+            newEvaluation = Double(Int(arrayContents_tmpVar)!)
+            //Clear viewWindow
+            viewWindow.documentView?.deleteToBeginningOfLine((Any).self)
+            
+            //Show result in viewWindow
+            viewWindow.documentView!.insertText("\(newEvaluation)")
+            
+            displayingResultOfAnEquation = true
+            return
+        }
+        
+        //Append an equal sign at the end for parsing purposes
+        numsAndMathSymbolsAsIndividualCharectors.append("=")
         
         //Loop through and parse the array that was created from the user's input, and concatenate didgits into a whole number e.g. 2,6,4 should become 264
         for numSymChar in numsAndMathSymbolsAsIndividualCharectors {
@@ -296,7 +326,6 @@ class ViewController: NSViewController {
         var evaluationSoFar = Stack()
         evaluationSoFar.push(intToPush: numsWhole[0]) //Create stack and start out with first value for sum/subtracting/multiplying/dividing algorithm
         
-        
         //(e.g. 43 + 5)
         for i in 0...(numsWhole.capacity - 2) {
 
@@ -370,6 +399,9 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //Disable window resize
+        self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height);
     }
 
     override var representedObject: Any? {
