@@ -25,9 +25,16 @@ class ViewController: NSViewController {
     //Stores calculations in equal sign function
     var newEvaluation = 0
     
+    //Boolean representing whether an equation was just solved, and the screen is showing the answer
+    var displayingResultOfAnEquation = false;
+    
+    
+    //A constant set to an arbitrary value, representing an error in unwraping an optional
+    let ERROR = 99999
+    
     @IBAction func zero(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
-        clearDisplayIfLastButtonWasOperator()
+        clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
         
         //Display appropriate number
         viewWindow.documentView!.insertText("0")
@@ -38,7 +45,7 @@ class ViewController: NSViewController {
     
     @IBAction func one(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
-        clearDisplayIfLastButtonWasOperator()
+        clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
         
         //Display appropriate number
         viewWindow.documentView!.insertText("1")
@@ -49,7 +56,7 @@ class ViewController: NSViewController {
     
     @IBAction func two(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
-        clearDisplayIfLastButtonWasOperator()
+        clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
         
         //Display appropriate number
         viewWindow.documentView!.insertText("2")
@@ -60,7 +67,7 @@ class ViewController: NSViewController {
     
     @IBAction func three(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
-        clearDisplayIfLastButtonWasOperator()
+        clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
         
        //Display appropriate number
         viewWindow.documentView!.insertText("3")
@@ -71,7 +78,7 @@ class ViewController: NSViewController {
     
     @IBAction func four(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
-        clearDisplayIfLastButtonWasOperator()
+        clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
         
        //Display appropriate number
         viewWindow.documentView!.insertText("4")
@@ -82,7 +89,7 @@ class ViewController: NSViewController {
     
     @IBAction func five(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
-        clearDisplayIfLastButtonWasOperator()
+        clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
         
         //Display appropriate number
         viewWindow.documentView!.insertText("5")
@@ -93,7 +100,7 @@ class ViewController: NSViewController {
     
     @IBAction func six(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
-        clearDisplayIfLastButtonWasOperator()
+        clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
         
        //Display appropriate number
         viewWindow.documentView!.insertText("6")
@@ -104,7 +111,7 @@ class ViewController: NSViewController {
     
     @IBAction func seven(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
-        clearDisplayIfLastButtonWasOperator()
+        clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
         
        //Display appropriate number
         viewWindow.documentView!.insertText("7")
@@ -116,7 +123,7 @@ class ViewController: NSViewController {
     
     @IBAction func eight(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
-        clearDisplayIfLastButtonWasOperator()
+        clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
         
        //Display appropriate number
         viewWindow.documentView!.insertText("8")
@@ -128,7 +135,7 @@ class ViewController: NSViewController {
     
     @IBAction func nine(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
-        clearDisplayIfLastButtonWasOperator()
+        clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
         
         //Display appropriate number
         viewWindow.documentView!.insertText("9")
@@ -185,14 +192,14 @@ class ViewController: NSViewController {
     @IBAction func equalitySign(_ sender: NSButton) {
         var combineDidgitsIntoNumber = ""
         
+        //Append an equal sign at the end for parsing purposes
         numsAndMathSymbolsAsIndividualCharectors.append("=")
         
         //Clear viewWindow
         viewWindow.documentView?.deleteToBeginningOfLine((Any).self)
         
-        //evaluate equation
+        //Loop through and parse the array that was created from the user's input, and concatenate didgits into a whole number e.g. 2,6,4 should become 264
         for numSymChar in numsAndMathSymbolsAsIndividualCharectors {
-//            print(numSymChar)
             switch (numSymChar.self) {
             case "0":
                 combineDidgitsIntoNumber.append("0")
@@ -226,7 +233,7 @@ class ViewController: NSViewController {
                 continue;
             case "+":
                 //When hitting operator, convert combined number to int
-                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? 99999
+                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? ERROR
                 //Add to array
                 print("Adding \(convToInt)")
                 numsWhole.append(convToInt)
@@ -237,7 +244,7 @@ class ViewController: NSViewController {
                 
             case "-":
                 //When hitting operator, convert combined number to int
-                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? 99999
+                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? ERROR
                 //Add to array
                 numsWhole.append(convToInt)
                 //Add operator to array
@@ -246,7 +253,7 @@ class ViewController: NSViewController {
                 combineDidgitsIntoNumber.removeAll()
             case "*":
                 //When hitting operator, convert combined number to int
-                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? 99999
+                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? ERROR
                 //Add to array
                 numsWhole.append(convToInt)
                 //Add operator to array
@@ -255,7 +262,7 @@ class ViewController: NSViewController {
                 combineDidgitsIntoNumber.removeAll()
             case "/":
                 //When hitting operator, convert combined number to int
-                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? 99999
+                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? ERROR
                 //Add to array
                 numsWhole.append(convToInt)
                 //Add operator to array
@@ -264,33 +271,24 @@ class ViewController: NSViewController {
                 combineDidgitsIntoNumber.removeAll()
             case "=":
                 //When hitting operator, convert combined number to int
-                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? 99999
-                print("Adding \(convToInt)")
+                var convToInt: Int = Int(combineDidgitsIntoNumber) ?? ERROR
                 //Add to array
                 numsWhole.append(convToInt)
                 //Clear combineDidgitsIntoNumber
                 combineDidgitsIntoNumber.removeAll()
                 
             default:
-                print("error")
+                print("An error occured")
             }
         }
         
-        
-//        var timesLooped = 1
         var evaluationSoFar = Stack()
         evaluationSoFar.push(intToPush: numsWhole[0]) //Create stack and start out with first value for sum/subtracting/multiplying/dividing algorithm
         
         
         //(e.g. 43 + 5)
         for i in 0...(numsWhole.capacity - 2) {
-            //e.g.     5                  +               2
-//            print("\(numsWhole[i])")
-//            Check if the index for mathSymbols exists
-//            if(mathSymbols.indices.contains(i)) {
-//                print("\(mathSymbols[i])")
-//            }
-            
+
             //Evaluate expression
             if(mathSymbols.indices.contains(i)) {
                 switch(mathSymbols[i]) {
@@ -304,53 +302,41 @@ class ViewController: NSViewController {
                     print(newEvaluation)
                     //Add new evaluation to stack
                     evaluationSoFar.push(intToPush: newEvaluation)
-                    
-//                    timesLooped += 1
+
                     continue
                 case "-":
                     //Fetch latest value and pop off stack
                     let value = evaluationSoFar.pop()!
                     //Subtract evaluation so far, plus next number
                     newEvaluation = (value - self.numsWhole[i + 1])
-                    //                    print("summing \(value) and \(self.numsWhole[i + 1])")
-                    //                    print(newEvaluation)
-                    //Add new evaluation to stack
                     evaluationSoFar.push(intToPush: newEvaluation)
-                    
-//                    timesLooped += 1
+
                     continue
                 case "*":
                     //Fetch latest value and pop off stack
                     let value = evaluationSoFar.pop()!
                     //Multiply evaluation so far, plus next number
                     newEvaluation = (value * self.numsWhole[i + 1])
-                                        print("multiplying \(value) and \(self.numsWhole[i + 1])")
-                                        print(newEvaluation)
                     //Add new evaluation to stack
                     evaluationSoFar.push(intToPush: newEvaluation)
-                    
-//                    timesLooped += 1
+
                     continue
                 case "/":
                     //Fetch latest value and pop off stack
                     let value = evaluationSoFar.pop()!
                     //Divide evaluation so far, plus next number
                     newEvaluation = (value / self.numsWhole[i + 1])
-                    //                    print("summing \(value) and \(self.numsWhole[i + 1])")
-                    //                    print(newEvaluation)
-                    //Add new evaluation to stack
                     evaluationSoFar.push(intToPush: newEvaluation)
-                    
-//                    timesLooped += 1
+
                     continue
                     
                     
-                default: //Is a number
+                default: //Is a number- skip
                     continue
                 }
             }
         }
-        //erase stack and arrays
+        //Erase stack and arrays
         evaluationSoFar.pop()
         mathSymbols.removeAll()
         numsWhole.removeAll()
@@ -362,6 +348,8 @@ class ViewController: NSViewController {
         //show result in viewWindow
         //Display appropriate number
         viewWindow.documentView!.insertText("\(newEvaluation)")
+        
+        displayingResultOfAnEquation = true
     }
     
     
@@ -380,7 +368,7 @@ class ViewController: NSViewController {
     }
     
     
-    func clearDisplayIfLastButtonWasOperator() {
+    func clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled() {
         //Get content of viewWindow
         let getViewWindowContent: NSTextView = viewWindow.documentView! as! NSTextView
         let contentsOfViewWindow:String = getViewWindowContent.string
@@ -392,6 +380,15 @@ class ViewController: NSViewController {
             contentsOfViewWindow == "-") {
             //Clear viewWindow
             viewWindow.documentView?.deleteToBeginningOfLine((Any).self)
+        }
+        
+        //If an equation was just solved, and the screen shows the answer, clear the screen
+        if(displayingResultOfAnEquation) {
+            //Clear viewWindow
+            viewWindow.documentView?.deleteToBeginningOfLine((Any).self)
+            
+            //Set boolean back to false
+            displayingResultOfAnEquation = false
         }
     }
 
