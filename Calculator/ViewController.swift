@@ -9,7 +9,6 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
     
     @IBOutlet weak var viewWindow: NSScrollView!
     
@@ -27,7 +26,6 @@ class ViewController: NSViewController {
     
     //Boolean representing whether an equation was just solved, and the screen is showing the answer
     var displayingResultOfAnEquation = false;
-    
     
     //A constant set to an arbitrary value, representing an error in unwraping an optional
     let ERROR = 99999.0
@@ -123,7 +121,6 @@ class ViewController: NSViewController {
         numsAndMathSymbolsAsIndividualCharectors.append("7")
     }
     
-    
     @IBAction func eight(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
         clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled()
@@ -134,7 +131,6 @@ class ViewController: NSViewController {
         //Append number to array
         numsAndMathSymbolsAsIndividualCharectors.append("8")
     }
-    
     
     @IBAction func nine(_ sender: NSButton) {
         //Clear display if last button pressed was an operator
@@ -154,7 +150,7 @@ class ViewController: NSViewController {
         //Display appropriate math symbol
         viewWindow.documentView!.insertText("+")
         
-        //Append number to array
+        //Append to array
         numsAndMathSymbolsAsIndividualCharectors.append("+")
     }
     
@@ -165,7 +161,7 @@ class ViewController: NSViewController {
         //Display appropriate math symbol
         viewWindow.documentView!.insertText("-")
         
-        //Append number to array
+        //Append to array
         numsAndMathSymbolsAsIndividualCharectors.append("-")
     }
     
@@ -176,7 +172,7 @@ class ViewController: NSViewController {
         //Display appropriate math symbol
         viewWindow.documentView!.insertText("/")
         
-        //Append number to array
+        //Append to array
         numsAndMathSymbolsAsIndividualCharectors.append("/")
     }
     
@@ -187,10 +183,9 @@ class ViewController: NSViewController {
         //Display appropriate math symbol
         viewWindow.documentView!.insertText("*")
         
-        //Append number to array
+        //Append to array
         numsAndMathSymbolsAsIndividualCharectors.append("*")
     }
-    
     
     @IBAction func clearAll(_ sender: NSButton) {
         //Erase arrays
@@ -204,7 +199,6 @@ class ViewController: NSViewController {
         //Clear results from last calculation
         newEvaluation = 0.0;
     }
-    
     
     @IBAction func equalitySign(_ sender: NSButton) {
         var combineDidgitsIntoNumber = ""
@@ -370,7 +364,6 @@ class ViewController: NSViewController {
 
                     continue
                     
-                    
                 default: //Is a number- skip
                     continue
                 }
@@ -392,9 +385,6 @@ class ViewController: NSViewController {
         displayingResultOfAnEquation = true
     }
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -409,7 +399,6 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-    
     
     func clearDisplayIfLastButtonWasOperatorOrIfAnEqWasJustEvaled() {
         //Get content of viewWindow
@@ -434,7 +423,4 @@ class ViewController: NSViewController {
             displayingResultOfAnEquation = false
         }
     }
-
-
 }
-
