@@ -3,7 +3,7 @@
 //  Calculator
 //
 //  Created by Isaac Raval on 4/7/19.
-//  Copyright © 2019 organization. All rights reserved.
+//  Copyright © 2019. All rights reserved.
 //
 
 import Cocoa
