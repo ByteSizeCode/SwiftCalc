@@ -1,6 +1,6 @@
 # SwiftCalc
 
-A Simple Calculator App For macOS
+A Simple Calculator App For macOS. Proof of concept– does not support order of operations.
 
-<img src="/Screenrecording/Demo.gif" alt="drawing" width="400" height="400"/>
+<img src="/Screenrecording/Demo.gif" alt="drawing" width="550" height="400"/>
 
